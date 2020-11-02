@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7739DF2225502FED00E872B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF2125502FED00E872B2 /* AppDelegate.swift */; };
-		7739DF2425502FED00E872B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF2325502FED00E872B2 /* SceneDelegate.swift */; };
-		7739DF2625502FED00E872B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF2525502FED00E872B2 /* ViewController.swift */; };
-		7739DF2925502FED00E872B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7739DF2725502FED00E872B2 /* Main.storyboard */; };
+		7739DF2625502FED00E872B2 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF2525502FED00E872B2 /* MainTableViewController.swift */; };
 		7739DF2B25502FEF00E872B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7739DF2A25502FEF00E872B2 /* Assets.xcassets */; };
 		7739DF2E25502FEF00E872B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7739DF2C25502FEF00E872B2 /* LaunchScreen.storyboard */; };
 		7739DF37255034F100E872B2 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF36255034F100E872B2 /* MainData.swift */; };
@@ -47,9 +45,7 @@
 /* Begin PBXFileReference section */
 		7739DF1E25502FED00E872B2 /* MurmanskNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MurmanskNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7739DF2125502FED00E872B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7739DF2325502FED00E872B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7739DF2525502FED00E872B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7739DF2825502FED00E872B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7739DF2525502FED00E872B2 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		7739DF2A25502FEF00E872B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7739DF2D25502FEF00E872B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7739DF2F25502FEF00E872B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,9 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				7798ED042550401B00F17FEA /* App */,
-				7739DF2525502FED00E872B2 /* ViewController.swift */,
+				7739DF2525502FED00E872B2 /* MainTableViewController.swift */,
 				7739DF40255039CC00E872B2 /* Model */,
-				7739DF2725502FED00E872B2 /* Main.storyboard */,
 				7739DF2A25502FEF00E872B2 /* Assets.xcassets */,
 				7739DF2C25502FEF00E872B2 /* LaunchScreen.storyboard */,
 				7739DF2F25502FEF00E872B2 /* Info.plist */,
@@ -130,7 +125,6 @@
 			children = (
 				7739DF36255034F100E872B2 /* MainData.swift */,
 				7798ED07255040A800F17FEA /* Post */,
-				7798ECC225503DEC00F17FEA /* IconSettings.swift */,
 				7798ED09255040FF00F17FEA /* Links */,
 				7798ED0B2550410A00F17FEA /* Meta */,
 			);
@@ -177,7 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				7739DF2125502FED00E872B2 /* AppDelegate.swift */,
-				7739DF2325502FED00E872B2 /* SceneDelegate.swift */,
 				7798ED032550400600F17FEA /* Helpers */,
 			);
 			path = App;
@@ -219,6 +212,7 @@
 		7798ED0D2550413800F17FEA /* Subtype */ = {
 			isa = PBXGroup;
 			children = (
+				7798ECC225503DEC00F17FEA /* IconSettings.swift */,
 				7798ECC325503DEC00F17FEA /* Subtype.swift */,
 				7798ECC025503DEB00F17FEA /* SubtypeName.swift */,
 			);
@@ -293,7 +287,6 @@
 			files = (
 				7739DF2E25502FEF00E872B2 /* LaunchScreen.storyboard in Resources */,
 				7739DF2B25502FEF00E872B2 /* Assets.xcassets in Resources */,
-				7739DF2925502FED00E872B2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,13 +312,12 @@
 				7798ECE725503DEE00F17FEA /* AgencyType.swift in Sources */,
 				7798ECF025503DEE00F17FEA /* Email.swift in Sources */,
 				7798ECF325503DEE00F17FEA /* Declension.swift in Sources */,
-				7739DF2625502FED00E872B2 /* ViewController.swift in Sources */,
+				7739DF2625502FED00E872B2 /* MainTableViewController.swift in Sources */,
 				7798ECE325503DEE00F17FEA /* Links.swift in Sources */,
 				7798ECF225503DEE00F17FEA /* Post.swift in Sources */,
 				7739DF2225502FED00E872B2 /* AppDelegate.swift in Sources */,
 				7798ECDC25503DEE00F17FEA /* City.swift in Sources */,
 				7798ECE825503DEE00F17FEA /* PostEntity.swift in Sources */,
-				7739DF2425502FED00E872B2 /* SceneDelegate.swift in Sources */,
 				7798ECE525503DEE00F17FEA /* Address.swift in Sources */,
 				7798ECE425503DEE00F17FEA /* Status.swift in Sources */,
 				7798ECF825503DEE00F17FEA /* Meta.swift in Sources */,
@@ -342,14 +334,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7739DF2725502FED00E872B2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7739DF2825502FED00E872B2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7739DF2C25502FEF00E872B2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -485,6 +469,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PFT2629W4Z;
 				INFOPLIST_FILE = MurmanskNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -492,7 +477,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = SwiftViktor.MurmanskNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -504,6 +489,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PFT2629W4Z;
 				INFOPLIST_FILE = MurmanskNews/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -511,7 +497,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = SwiftViktor.MurmanskNews;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
