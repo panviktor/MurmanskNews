@@ -7,32 +7,22 @@
 
 import UIKit
 
-class MainTableViewController: UITableViewController {
+class MainTableViewController: UITableViewController  {
     private let imageView = UIImageView(image: UIImage(named: "settings"))
-
-    var model: MainData?
+    private var viewModel: PostViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         view.backgroundColor = .white
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifiers.cellID)
         
-        if let url = URL(string: "https://murmansk.travel/api/trips") {
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data {
-                    do {
-                        let data = try JSONDecoder().decode(MainData.self, from: data)
-                        print(data.post)
-                    } catch let error {
-                        print(error)
-                    }
-                }
-            }.resume()
-        }
+        viewModel = PostViewModel(delegate: self)
+        viewModel.fetchPosts()
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)  {
-        print(#line, #function)
+        tableView.reloadData()
     }
 }
 
@@ -113,21 +103,66 @@ extension MainTableViewController {
         guard let height = navigationController?.navigationBar.frame.height else { return }
         moveAndResizeImage(for: height)
     }
-    
-    
-    
-    
-    
 }
 
 //MARK: - Table View DataSource
 extension MainTableViewController {
     private enum CellIdentifiers {
-        static let list = "List"
+        static let cellID = "Post"
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(viewModel.currentCount)
+        return viewModel.currentCount
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.cellID, for: indexPath)
+        
+        //as! PostTableViewCell
+        //      if isLoadingCell(for: indexPath) {
+        //
+        //      } else {
+        //        cell.configure(with: viewModel.post(at: indexPath.row))
+        //      }
+        //      return cell
+        //    }
+        
+        
+        
+        cell.textLabel?.text =   viewModel.post(at: indexPath.row).title
+        
+        print(viewModel.post(at: indexPath.row))
+        
+        return cell
     }
 }
 
-//MARK: - Table View Delegate
-extension MainTableViewController {
+extension MainTableViewController: PostViewModelDelegate {
+    func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
+        guard let newIndexPathsToReload = newIndexPathsToReload else {
+            tableView.reloadData()
+            return
+        }
+        
+        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+    }
     
+    func onFetchFailed(with reason: String) {
+        print(reason)
+    }
 }
+
+private extension MainTableViewController {
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row >= viewModel.currentCount
+    }
+    
+    func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
+        let indexPathsForVisibleRows = tableView.indexPathsForVisibleRows ?? []
+        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
+        return Array(indexPathsIntersection)
+    }
+}
+

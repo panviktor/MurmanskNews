@@ -11,7 +11,7 @@
 		7739DF2625502FED00E872B2 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF2525502FED00E872B2 /* MainTableViewController.swift */; };
 		7739DF2B25502FEF00E872B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7739DF2A25502FEF00E872B2 /* Assets.xcassets */; };
 		7739DF2E25502FEF00E872B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7739DF2C25502FEF00E872B2 /* LaunchScreen.storyboard */; };
-		7739DF37255034F100E872B2 /* MainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF36255034F100E872B2 /* MainData.swift */; };
+		7739DF37255034F100E872B2 /* MainDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7739DF36255034F100E872B2 /* MainDataResponse.swift */; };
 		7798ECBA25503CCC00F17FEA /* JSONSchemaSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ECB925503CCC00F17FEA /* JSONSchemaSupport.swift */; };
 		7798ECDC25503DEE00F17FEA /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ECBF25503DEB00F17FEA /* City.swift */; };
 		7798ECDD25503DEE00F17FEA /* SubtypeName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ECC025503DEB00F17FEA /* SubtypeName.swift */; };
@@ -40,6 +40,12 @@
 		7798ECF625503DEE00F17FEA /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ECD925503DEE00F17FEA /* Tag.swift */; };
 		7798ECF725503DEE00F17FEA /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ECDA25503DEE00F17FEA /* Cost.swift */; };
 		7798ECF825503DEE00F17FEA /* Meta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ECDB25503DEE00F17FEA /* Meta.swift */; };
+		7798ED1C2550B7AF00F17FEA /* DataResponseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ED1A2550B7AF00F17FEA /* DataResponseError.swift */; };
+		7798ED1D2550B7AF00F17FEA /* HTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ED1B2550B7AF00F17FEA /* HTTPURLResponse.swift */; };
+		7798ED222550B81300F17FEA /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ED212550B81300F17FEA /* Result.swift */; };
+		7798ED262550BA8D00F17FEA /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ED252550BA8D00F17FEA /* PostViewModel.swift */; };
+		7798ED2A2550BC4D00F17FEA /* MurmanskDataClien.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ED292550BC4D00F17FEA /* MurmanskDataClien.swift */; };
+		7798ED2F2550CD1600F17FEA /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798ED2E2550CD1600F17FEA /* PostTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,7 +55,7 @@
 		7739DF2A25502FEF00E872B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7739DF2D25502FEF00E872B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7739DF2F25502FEF00E872B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7739DF36255034F100E872B2 /* MainData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainData.swift; sourceTree = "<group>"; };
+		7739DF36255034F100E872B2 /* MainDataResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDataResponse.swift; sourceTree = "<group>"; };
 		7798ECB925503CCC00F17FEA /* JSONSchemaSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONSchemaSupport.swift; sourceTree = "<group>"; };
 		7798ECBF25503DEB00F17FEA /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		7798ECC025503DEB00F17FEA /* SubtypeName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtypeName.swift; sourceTree = "<group>"; };
@@ -78,6 +84,12 @@
 		7798ECD925503DEE00F17FEA /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		7798ECDA25503DEE00F17FEA /* Cost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
 		7798ECDB25503DEE00F17FEA /* Meta.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meta.swift; sourceTree = "<group>"; };
+		7798ED1A2550B7AF00F17FEA /* DataResponseError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataResponseError.swift; sourceTree = "<group>"; };
+		7798ED1B2550B7AF00F17FEA /* HTTPURLResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPURLResponse.swift; sourceTree = "<group>"; };
+		7798ED212550B81300F17FEA /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		7798ED252550BA8D00F17FEA /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
+		7798ED292550BC4D00F17FEA /* MurmanskDataClien.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MurmanskDataClien.swift; sourceTree = "<group>"; };
+		7798ED2E2550CD1600F17FEA /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +124,10 @@
 			children = (
 				7798ED042550401B00F17FEA /* App */,
 				7739DF2525502FED00E872B2 /* MainTableViewController.swift */,
+				7798ED2E2550CD1600F17FEA /* PostTableViewCell.swift */,
+				7798ED1F2550B7B500F17FEA /* Networking */,
 				7739DF40255039CC00E872B2 /* Model */,
+				7798ED252550BA8D00F17FEA /* PostViewModel.swift */,
 				7739DF2A25502FEF00E872B2 /* Assets.xcassets */,
 				7739DF2C25502FEF00E872B2 /* LaunchScreen.storyboard */,
 				7739DF2F25502FEF00E872B2 /* Info.plist */,
@@ -123,7 +138,7 @@
 		7739DF40255039CC00E872B2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7739DF36255034F100E872B2 /* MainData.swift */,
+				7739DF36255034F100E872B2 /* MainDataResponse.swift */,
 				7798ED07255040A800F17FEA /* Post */,
 				7798ED09255040FF00F17FEA /* Links */,
 				7798ED0B2550410A00F17FEA /* Meta */,
@@ -228,6 +243,17 @@
 			path = Tag;
 			sourceTree = "<group>";
 		};
+		7798ED1F2550B7B500F17FEA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7798ED292550BC4D00F17FEA /* MurmanskDataClien.swift */,
+				7798ED1A2550B7AF00F17FEA /* DataResponseError.swift */,
+				7798ED1B2550B7AF00F17FEA /* HTTPURLResponse.swift */,
+				7798ED212550B81300F17FEA /* Result.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -301,7 +327,9 @@
 				7798ECF625503DEE00F17FEA /* Tag.swift in Sources */,
 				7798ECEA25503DEE00F17FEA /* Title.swift in Sources */,
 				7798ECDD25503DEE00F17FEA /* SubtypeName.swift in Sources */,
+				7798ED2F2550CD1600F17FEA /* PostTableViewCell.swift in Sources */,
 				7798ECE625503DEE00F17FEA /* AgencyEntity.swift in Sources */,
+				7798ED1C2550B7AF00F17FEA /* DataResponseError.swift in Sources */,
 				7798ECED25503DEE00F17FEA /* CityEntity.swift in Sources */,
 				7798ECDF25503DEE00F17FEA /* IconSettings.swift in Sources */,
 				7798ECEB25503DEE00F17FEA /* Phone.swift in Sources */,
@@ -310,11 +338,14 @@
 				7798ECEC25503DEE00F17FEA /* PostType.swift in Sources */,
 				7798ECF425503DEE00F17FEA /* AgencyPivot.swift in Sources */,
 				7798ECE725503DEE00F17FEA /* AgencyType.swift in Sources */,
+				7798ED2A2550BC4D00F17FEA /* MurmanskDataClien.swift in Sources */,
+				7798ED222550B81300F17FEA /* Result.swift in Sources */,
 				7798ECF025503DEE00F17FEA /* Email.swift in Sources */,
 				7798ECF325503DEE00F17FEA /* Declension.swift in Sources */,
 				7739DF2625502FED00E872B2 /* MainTableViewController.swift in Sources */,
 				7798ECE325503DEE00F17FEA /* Links.swift in Sources */,
 				7798ECF225503DEE00F17FEA /* Post.swift in Sources */,
+				7798ED262550BA8D00F17FEA /* PostViewModel.swift in Sources */,
 				7739DF2225502FED00E872B2 /* AppDelegate.swift in Sources */,
 				7798ECDC25503DEE00F17FEA /* City.swift in Sources */,
 				7798ECE825503DEE00F17FEA /* PostEntity.swift in Sources */,
@@ -322,8 +353,9 @@
 				7798ECE425503DEE00F17FEA /* Status.swift in Sources */,
 				7798ECF825503DEE00F17FEA /* Meta.swift in Sources */,
 				7798ECBA25503CCC00F17FEA /* JSONSchemaSupport.swift in Sources */,
+				7798ED1D2550B7AF00F17FEA /* HTTPURLResponse.swift in Sources */,
 				7798ECF125503DEE00F17FEA /* Slug.swift in Sources */,
-				7739DF37255034F100E872B2 /* MainData.swift in Sources */,
+				7739DF37255034F100E872B2 /* MainDataResponse.swift in Sources */,
 				7798ECE925503DEE00F17FEA /* CityName.swift in Sources */,
 				7798ECE125503DEE00F17FEA /* Mode.swift in Sources */,
 				7798ECEF25503DEE00F17FEA /* Agency.swift in Sources */,

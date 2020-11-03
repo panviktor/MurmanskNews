@@ -1,8 +1,8 @@
 import Foundation
 
 // MARK: - MainData
-struct MainData: Codable {
-    let post: [Post]
+struct MainDataResponse: Codable {
+    var post: [Post]
     let links: Links
     let meta: Meta
     
