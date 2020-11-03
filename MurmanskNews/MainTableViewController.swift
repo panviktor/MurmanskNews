@@ -14,6 +14,7 @@ class MainTableViewController: UITableViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        configureRefreshControl ()
         view.backgroundColor = .white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifiers.cellID)
         
@@ -22,7 +23,13 @@ class MainTableViewController: UITableViewController  {
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)  {
-        tableView.reloadData()
+        viewModel.fetchPosts(first: false)
+    }
+    
+    @objc func fetchNextPost()  {
+        DispatchQueue.main.async {
+            self.refreshControl?.endRefreshing()
+        }
     }
 }
 
@@ -103,6 +110,12 @@ extension MainTableViewController {
         guard let height = navigationController?.navigationBar.frame.height else { return }
         moveAndResizeImage(for: height)
     }
+    
+    func configureRefreshControl () {
+        // Add the refresh control to your UIScrollView object.
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(fetchNextPost), for: .valueChanged)
+    }
 }
 
 //MARK: - Table View DataSource
@@ -140,13 +153,16 @@ extension MainTableViewController {
 
 extension MainTableViewController: PostViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-        guard let newIndexPathsToReload = newIndexPathsToReload else {
-            tableView.reloadData()
-            return
-        }
-        
-        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+//        guard let newIndexPathsToReload = newIndexPathsToReload else {
+//            tableView.reloadData()
+//            return
+//        }
+//
+//
+//        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
+//        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
+
+        tableView.reloadData()
     }
     
     func onFetchFailed(with reason: String) {
@@ -165,4 +181,5 @@ private extension MainTableViewController {
         return Array(indexPathsIntersection)
     }
 }
+
 

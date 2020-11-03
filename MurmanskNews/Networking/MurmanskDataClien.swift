@@ -19,11 +19,14 @@ final class MurmanskDataClien {
     private var maxPage = 1
     private var pageWasLoaded: Set<Int> = []
     
+    
+    var decoder: JSONDecoder? = JSONDecoder()
+    
     func getNextURL() -> URL? {
         page += 1
-        let nextPage = min(maxPage, page)
         if !pageWasLoaded.contains(page) {
-            return URLBuilder(for: nextPage)
+            session.finishTasksAndInvalidate()
+            return URLBuilder(for: page)
         } else {
             return nil
         }
@@ -44,7 +47,7 @@ final class MurmanskDataClien {
     }
     
     func fetchData(with currentURL: URL, completion: @escaping (Result<MainDataResponse, DataResponseError>) -> Void) {
-        URLSession.shared.dataTask(with: currentURL) { data, response, error in
+        session.dataTask(with: currentURL) { data, response, error in
             guard
                 let httpResponse = response as? HTTPURLResponse,
                 httpResponse.hasSuccessStatusCode,
@@ -54,13 +57,19 @@ final class MurmanskDataClien {
                 return
             }
             
+            
+            
+            let string = String(data: data, encoding: .utf8)
+            print(string)
+            
             guard let decodedResponse = try? JSONDecoder().decode(MainDataResponse.self, from: data) else {
-                self.pageWasLoaded.insert(self.page)
                 completion(Result.failure(DataResponseError.decoding))
                 return
             }
             
             completion(Result.success(decodedResponse))
+            self.pageWasLoaded.insert(self.page)
+            
         }.resume()
     }
     

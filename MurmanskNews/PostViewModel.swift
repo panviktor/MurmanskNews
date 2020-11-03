@@ -18,9 +18,9 @@ final class PostViewModel {
     private var posts: [Post] = []
     private var currentPage = 1
     private var isFetchInProgress = false
+    private var currentURL: URL!
     
     let client = MurmanskDataClien()
-    let currentURL: URL!
     
     init(delegate: PostViewModelDelegate) {
         self.delegate = delegate
@@ -35,12 +35,16 @@ final class PostViewModel {
         return posts[index]
     }
     
-    func fetchPosts() {
+    func fetchPosts(first: Bool = true) {
         guard !isFetchInProgress else {
             return
         }
         
         isFetchInProgress = true
+        
+        if !first {
+            currentURL = client.getNextURL()
+        }
         
         client.fetchData(with: currentURL)  { result in
             switch result {
@@ -55,23 +59,10 @@ final class PostViewModel {
                     self.currentPage += 1
                     self.isFetchInProgress = false
                     self.posts.append(contentsOf: response.post)
-                    
-                    if response.meta.lastPage < response.meta.currentPage {
-                        let indexPathsToReload = self.calculateIndexPathsToReload(from: response.post)
-                        self.delegate?.onFetchCompleted(with: indexPathsToReload)
-                        self.isFetchInProgress = false
-                    } else {
-                        self.delegate?.onFetchCompleted(with: .none)
-                        self.isFetchInProgress = false
-                    }
+                    self.delegate?.onFetchCompleted(with: .none)
+                    self.isFetchInProgress = false
                 }
             }
         }
-    }
-    
-    private func calculateIndexPathsToReload(from newPosts: [Post]) -> [IndexPath] {
-        let startIndex = posts.count - newPosts.count
-        let endIndex = startIndex + newPosts.count
-        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
     }
 }

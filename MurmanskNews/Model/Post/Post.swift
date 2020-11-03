@@ -2,42 +2,43 @@ import Foundation
 
 // MARK: - Post
 struct Post: Codable {
-    let id: Int
-    let title, datumDescription: String
+    let id: Int?
+    let title: String?
+    let datumDescription: String?
     let userid: JSONNull?
     let createdAt, updatedAt: Int
     let deletedAt: JSONNull?
     let level: Int?
     let distance: String?
-    let duration: Duration
-    let images: [String]
-    let cityid: Int
-    let type: PostType
+    let duration: Duration?
+    let images: [String]?
+    let cityid: Int?
+    let type: PostType?
     let angle: JSONNull?
-    let cost: Cost
+    let cost: Cost?
     let contacts: String?
-    let status: Status
+    let status: Status?
     let direction: [[Double]]?
-    let subtypeid, adminid: Int
-    let promo: Bool
-    let tourismTypeid: Int
-    let accessibleEnvironment: Bool
+    let subtypeid, adminid: Int?
+    let promo: Bool?
+    let tourismTypeid: Int?
+    let accessibleEnvironment: Bool?
     let author: JSONNull?
-    let city: City
-    let subtype: Subtype
-    let places: [JSONAny]
-    let tags: [Tag]
-    let entity: PostEntity
-    let annotation: String
-    let additions: [JSONAny]
-    let rating: Int
+    let city: City?
+    let subtype: Subtype?
+    let places: [JSONAny]?
+    let tags: [Tag]?
+    let entity: PostEntity?
+    let annotation: String?
+    let additions: [JSONAny]?
+    let rating: Int?
     let currentUserRating: JSONNull?
-    let countRating: Int
-    let agency: Agency
+    let countRating: Int?
+    let agency: Agency?
     let guide: JSONNull?
-    let link: String
-    let favorited: Bool
-    let schedules: [JSONAny]
+    let link: String?
+    let favorited: Bool?
+    let schedules: [JSONAny]?
 
     enum CodingKeys: String, CodingKey {
         case id, title
