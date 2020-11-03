@@ -16,14 +16,14 @@ class MainTableViewController: UITableViewController  {
         setupNavigationBar()
         configureRefreshControl ()
         view.backgroundColor = .white
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellIdentifiers.cellID)
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.cellID)
         
         viewModel = PostViewModel(delegate: self)
         viewModel.fetchPosts()
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)  {
-      
+        
     }
     
     @objc func fetchNextPost()  {
@@ -133,44 +133,21 @@ extension MainTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.cellID, for: indexPath) as! PostTableViewCell
         
-        //as! PostTableViewCell
-        //      if isLoadingCell(for: indexPath) {
-        //
-        //      } else {
-        //        cell.configure(with: viewModel.post(at: indexPath.row))
-        //      }
-        //      return cell
-        //    }
+        cell.configure(with: viewModel.post(at: indexPath.row))
         
-        
-        
-        
-        cell.textLabel?.text =   viewModel.post(at: indexPath.row).title
-        
-        
-      print(viewModel.post(at: indexPath.row).debugDescription)
         return cell
     }
 }
 
 extension MainTableViewController: PostViewModelDelegate {
     func onFetchCompleted(with newIndexPathsToReload: [IndexPath]?) {
-//        guard let newIndexPathsToReload = newIndexPathsToReload else {
-//            tableView.reloadData()
-//            return
-//        }
-//
-//
-//        let indexPathsToReload = visibleIndexPathsToReload(intersecting: newIndexPathsToReload)
-//        tableView.reloadRows(at: indexPathsToReload, with: .automatic)
-
         tableView.reloadData()
     }
     
     func onFetchFailed(with reason: String) {
-     print(reason)
+        print(reason)
     }
 }
 

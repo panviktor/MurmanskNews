@@ -12,6 +12,7 @@ protocol PostViewModelDelegate: class {
     func onFetchFailed(with reason: String)
 }
 
+
 final class PostViewModel {
     private weak var delegate: PostViewModelDelegate?
     
