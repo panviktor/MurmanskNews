@@ -19,7 +19,7 @@ final class MurmanskDataClien {
     private var maxPage = 1
     private var pageWasLoaded: Set<Int> = []
     
-    
+    let session = URLSession.shared
     var decoder: JSONDecoder? = JSONDecoder()
     
     func getNextURL() -> URL? {
@@ -57,10 +57,8 @@ final class MurmanskDataClien {
                 return
             }
             
-            
-            
             let string = String(data: data, encoding: .utf8)
-            print(string)
+            print(string ?? "")
             
             guard let decodedResponse = try? JSONDecoder().decode(MainDataResponse.self, from: data) else {
                 completion(Result.failure(DataResponseError.decoding))
