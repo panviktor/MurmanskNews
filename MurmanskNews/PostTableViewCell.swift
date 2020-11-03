@@ -8,6 +8,8 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+    private let screenSize: CGRect = UIScreen.main.bounds
+    
     //MARK: - Layers
     //First layer
     let cardView: UIView = {
@@ -22,25 +24,57 @@ class PostTableViewCell: UITableViewCell {
     let firstStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.axis = .vertical
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         stackView.alignment = .leading
         stackView.spacing = 2
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
+    let ratingStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .leading
+        stackView.spacing = 2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let durationStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .leading
+        stackView.spacing = 2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    
     let mainImageView: WebImageView = {
         let imageView = WebImageView()
+        imageView.contentMode =  .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
+    let cityNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        label.font = UIFont.boldSystemFont(ofSize: 10)
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
+    }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textAlignment = .left
-        label.numberOfLines = 0
+        label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textAlignment = .natural
+        label.numberOfLines = 2
         return label
     }()
     
@@ -53,19 +87,21 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    let cityNameLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .gray
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textAlignment = .left
-        label.numberOfLines = 1
-        return label
+    
+    let bottonView: UIView = {
+        let view = UIView(frame: .zero)
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
+    
     
     let ratingImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "eye")
+        imageView.image = UIImage(named: "rating")
         return imageView
     }()
     
@@ -75,12 +111,10 @@ class PostTableViewCell: UITableViewCell {
         return textView
     }()
     
-    
-    
     let durationImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "eye")
+        imageView.image = UIImage(named: "duration")
         return imageView
     }()
     
@@ -90,10 +124,8 @@ class PostTableViewCell: UITableViewCell {
         return textView
     }()
     
-    
-    
     override func prepareForReuse() {
-        //        mainImageView.set(imageURL: nil)
+        mainImageView.set(imageURL: nil)
     }
     
     //MARK: - init
@@ -106,7 +138,6 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     func configure(with post: Post) {
         mainImageView.set(imageURL: post.images?.first)
         titleLabel.text = post.title
@@ -118,80 +149,55 @@ class PostTableViewCell: UITableViewCell {
     
     private func setupFirstlayer() {
         contentView.addSubview(cardView)
+        cardView.addSubview(mainImageView)
         cardView.addSubview(firstStackView)
         
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(
-            equalTo: contentView.topAnchor,
-            constant: 0),
-            cardView.rightAnchor.constraint(
-            equalTo: contentView.rightAnchor,
-            constant: 0),
-            cardView.bottomAnchor.constraint(
-            equalTo: contentView.bottomAnchor,
-            constant: 0),
-            cardView.leftAnchor.constraint(
-            equalTo: contentView.leftAnchor,
-            constant: 0)
-      ])
-
+            cardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            cardView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 5),
+            cardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
+            cardView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: -5)
+        ])
+        
         NSLayoutConstraint.activate([
-            firstStackView.topAnchor.constraint(
-            equalTo: cardView.topAnchor,
-            constant: 2),
-            firstStackView.rightAnchor.constraint(
-            equalTo: cardView.rightAnchor,
-            constant: -2),
-            firstStackView.bottomAnchor.constraint(
-            equalTo: cardView.bottomAnchor,
-            constant: -2),
-            firstStackView.leftAnchor.constraint(
-            equalTo: cardView.leftAnchor,
-            constant: 2)
-      ])
+            mainImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 1),
+            mainImageView.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            mainImageView.widthAnchor.constraint(equalToConstant: screenSize.size.width * 0.98),
+            mainImageView.heightAnchor.constraint(equalToConstant: screenSize.size.height / 3.5)
+        ])
+        
+        NSLayoutConstraint.activate([
+            firstStackView.topAnchor.constraint(equalTo: mainImageView.bottomAnchor, constant: 5),
+            firstStackView.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            firstStackView.widthAnchor.constraint(equalToConstant: screenSize.size.width * 0.98),
+            firstStackView.heightAnchor.constraint(equalToConstant: screenSize.size.height / 4.5),
+            firstStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -2),
+        ])
         
         firstStackView.addArrangedSubview(cityNameLabel)
         firstStackView.addArrangedSubview(titleLabel)
-        firstStackView.addArrangedSubview(descriptionLabel)
-       
-    }
-}
-
-class WebImageView: UIImageView {
-    private var currentUrlString: String?
-    
-    func set(imageURL: String?) {
+        firstStackView.addArrangedSubview(bottonView)
         
-        currentUrlString = imageURL
+        NSLayoutConstraint.activate([
+            bottonView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
+            bottonView.bottomAnchor.constraint(equalTo: firstStackView.bottomAnchor, constant: 0),
+            bottonView.leftAnchor.constraint(equalTo: firstStackView.leftAnchor, constant: 0),
+            bottonView.rightAnchor.constraint(equalTo: firstStackView.rightAnchor, constant: -1),
+        ])
         
-        guard let imageURL = imageURL, let url = URL(string: imageURL) else {
-            self.image = nil
-            return
-        }
+        bottonView.addSubview(ratingStackView)
+        bottonView.addSubview(durationStackView)
+        ratingStackView.addArrangedSubview(ratingImage)
+        ratingStackView.addArrangedSubview(ratingLabel)
+        durationStackView.addArrangedSubview(durationImage)
+        durationStackView.addArrangedSubview(durationLabel)
         
-        if let cachedResponse = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {
-            self.image = UIImage(data: cachedResponse.data)
-            return
-        }
+        NSLayoutConstraint.activate([
+            bottonView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
+            bottonView.bottomAnchor.constraint(equalTo: firstStackView.bottomAnchor, constant: 0),
+            bottonView.leftAnchor.constraint(equalTo: firstStackView.leftAnchor, constant: 0),
+            bottonView.rightAnchor.constraint(equalTo: firstStackView.rightAnchor, constant: -1),
+        ])
         
-        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-            DispatchQueue.main.async {
-                if let data = data, let response = response {
-                    
-                    self?.handleLoadedImage(data: data, response: response)
-                }
-            }
-        }
-        dataTask.resume()
-    }
-    
-    private func handleLoadedImage(data: Data, response: URLResponse) {
-        guard let responseURL = response.url else { return }
-        let cachedResponse = CachedURLResponse(response: response, data: data)
-        URLCache.shared.storeCachedResponse(cachedResponse, for: URLRequest(url: responseURL))
-        
-        if responseURL.absoluteString == currentUrlString {
-            self.image = UIImage(data: data)
-        }
     }
 }
