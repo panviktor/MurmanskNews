@@ -13,13 +13,15 @@ class MainTableViewController: UITableViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupNavigationBar()
-        configureRefreshControl ()
-        view.backgroundColor = .white
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.cellID)
-        
         viewModel = PostViewModel(delegate: self)
         viewModel.fetchPosts()
+        setupNavigationBar()
+        configureRefreshControl()
+
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: CellIdentifiers.cellID)
+   
+      
+ 
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)  {
@@ -35,6 +37,21 @@ class MainTableViewController: UITableViewController  {
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         viewModel.fetchPosts(first: false)
     }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        return UITableView.automaticDimension
+
+    }
+
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        500
+
+    }
+    
 }
 
 //MARK: - Navigation Bar
@@ -134,9 +151,7 @@ extension MainTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.cellID, for: indexPath) as! PostTableViewCell
-        
         cell.configure(with: viewModel.post(at: indexPath.row))
-        
         return cell
     }
 }

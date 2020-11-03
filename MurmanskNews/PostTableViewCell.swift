@@ -7,18 +7,26 @@
 
 import UIKit
 
-protocol PostTableViewCellDelegate: class {
-    func revealPost(for cell: PostTableViewCell)
-}
-
 class PostTableViewCell: UITableViewCell {
     //MARK: - Layers
     //First layer
     let cardView: UIView = {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        let view = UIView(frame: .zero)
+        view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    let firstStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.alignment = .leading
+        stackView.spacing = 2
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     let mainImageView: WebImageView = {
@@ -27,41 +35,31 @@ class PostTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    
-    let titleLabel: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.isSelectable = true
-        textView.isUserInteractionEnabled = true
-        textView.isEditable = false
-        let padding = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
-        textView.dataDetectorTypes = UIDataDetectorTypes.all
-        return textView
+    let titleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
     }()
     
-    let descriptionLabel: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.isSelectable = true
-        textView.isUserInteractionEnabled = true
-        textView.isEditable = false
-        let padding = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
-        textView.dataDetectorTypes = UIDataDetectorTypes.all
-        return textView
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textAlignment = .left
+        label.numberOfLines = 0
+        return label
     }()
     
-    let cityNameLabel: UITextView = {
-        let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.isSelectable = true
-        textView.isUserInteractionEnabled = true
-        textView.isEditable = false
-        let padding = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
-        textView.dataDetectorTypes = UIDataDetectorTypes.all
-        return textView
+    let cityNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .gray
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textAlignment = .left
+        label.numberOfLines = 1
+        return label
     }()
     
     let ratingImage: UIImageView = {
@@ -73,15 +71,10 @@ class PostTableViewCell: UITableViewCell {
     
     let ratingLabel: UITextView = {
         let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.isSelectable = true
-        textView.isUserInteractionEnabled = true
-        textView.isEditable = false
-        let padding = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
-        textView.dataDetectorTypes = UIDataDetectorTypes.all
+        
         return textView
     }()
+    
     
     
     let durationImage: UIImageView = {
@@ -93,30 +86,20 @@ class PostTableViewCell: UITableViewCell {
     
     let durationLabel: UITextView = {
         let textView = UITextView()
-        textView.isScrollEnabled = false
-        textView.isSelectable = true
-        textView.isUserInteractionEnabled = true
-        textView.isEditable = false
-        let padding = textView.textContainer.lineFragmentPadding
-        textView.textContainerInset = UIEdgeInsets.init(top: 0, left: -padding, bottom: 0, right: -padding)
-        textView.dataDetectorTypes = UIDataDetectorTypes.all
+        
         return textView
     }()
     
     
     
     override func prepareForReuse() {
-        mainImageView.set(imageURL: nil)
+        //        mainImageView.set(imageURL: nil)
     }
     
     //MARK: - init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .clear
-        selectionStyle = .none
-        
-        cardView.layer.cornerRadius = 10
-        cardView.clipsToBounds = true
+        setupFirstlayer()
     }
     
     required init?(coder: NSCoder) {
@@ -130,12 +113,51 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = post.description
         cityNameLabel.text = "Мурманск"
         durationLabel.text = post.duration
-        ratingLabel.text = "\(post.rating ?? 0.0)"
+        durationLabel.text = "\(post.rating ?? 0.0)"
+    }
+    
+    private func setupFirstlayer() {
+        contentView.addSubview(cardView)
+        cardView.addSubview(firstStackView)
+        
+        NSLayoutConstraint.activate([
+            cardView.topAnchor.constraint(
+            equalTo: contentView.topAnchor,
+            constant: 0),
+            cardView.rightAnchor.constraint(
+            equalTo: contentView.rightAnchor,
+            constant: 0),
+            cardView.bottomAnchor.constraint(
+            equalTo: contentView.bottomAnchor,
+            constant: 0),
+            cardView.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor,
+            constant: 0)
+      ])
+
+        NSLayoutConstraint.activate([
+            firstStackView.topAnchor.constraint(
+            equalTo: cardView.topAnchor,
+            constant: 2),
+            firstStackView.rightAnchor.constraint(
+            equalTo: cardView.rightAnchor,
+            constant: -2),
+            firstStackView.bottomAnchor.constraint(
+            equalTo: cardView.bottomAnchor,
+            constant: -2),
+            firstStackView.leftAnchor.constraint(
+            equalTo: cardView.leftAnchor,
+            constant: 2)
+      ])
+        
+        firstStackView.addArrangedSubview(cityNameLabel)
+        firstStackView.addArrangedSubview(titleLabel)
+        firstStackView.addArrangedSubview(descriptionLabel)
+       
     }
 }
 
 class WebImageView: UIImageView {
-    
     private var currentUrlString: String?
     
     func set(imageURL: String?) {
