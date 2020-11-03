@@ -56,10 +56,7 @@ final class MurmanskDataClien {
                 completion(Result.failure(DataResponseError.network))
                 return
             }
-            
-            let string = String(data: data, encoding: .utf8)
-            print(string ?? "")
-            
+          
             guard let decodedResponse = try? JSONDecoder().decode(MainDataResponse.self, from: data) else {
                 completion(Result.failure(DataResponseError.decoding))
                 return

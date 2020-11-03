@@ -23,13 +23,17 @@ class MainTableViewController: UITableViewController  {
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer)  {
-        viewModel.fetchPosts(first: false)
+      
     }
     
     @objc func fetchNextPost()  {
         DispatchQueue.main.async {
             self.refreshControl?.endRefreshing()
         }
+    }
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        viewModel.fetchPosts(first: false)
     }
 }
 
@@ -125,7 +129,6 @@ extension MainTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.currentCount)
         return viewModel.currentCount
     }
     
@@ -143,10 +146,11 @@ extension MainTableViewController {
         
         
         
+        
         cell.textLabel?.text =   viewModel.post(at: indexPath.row).title
         
-        print(viewModel.post(at: indexPath.row))
         
+      print(viewModel.post(at: indexPath.row).debugDescription)
         return cell
     }
 }
@@ -166,7 +170,7 @@ extension MainTableViewController: PostViewModelDelegate {
     }
     
     func onFetchFailed(with reason: String) {
-        print(reason)
+     print(reason)
     }
 }
 
@@ -181,5 +185,3 @@ private extension MainTableViewController {
         return Array(indexPathsIntersection)
     }
 }
-
-
